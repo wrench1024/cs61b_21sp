@@ -25,9 +25,10 @@ public class ArrayDeque<T> implements deque<T>{
         mid = capacity / 2;
     }
     private void Resizing() {
-        float R = size / capacity;
+        double R = size * 1.0 / capacity;
         while (R < 0.25) {
             capacity /= 2;
+            R = size * 1.0 / capacity;
         }
         resizing(capacity);
     }
