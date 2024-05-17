@@ -36,7 +36,7 @@ public class ArrayDeque<T> implements deque<T>{
     public void addFirst(T item) {
         items[mid + mSize--] = item;
         size++;
-        if(size == capacity){
+        if(size == capacity - 1){
             resizing(size * 2);
         }
     }
@@ -45,7 +45,7 @@ public class ArrayDeque<T> implements deque<T>{
     public void addLast(T item) {
         items[mid + pSize++] = item;
         size++;
-        if(size == capacity){
+        if(size == capacity - 1){
             resizing(size * 2);
         }
     }
