@@ -7,12 +7,14 @@ public class ArrayDeque<T> implements deque<T>{
     private int pSize;
     private int mSize;
     private int capacity;
+    private int mid = capacity / 2;
     private T[] items;
     public ArrayDeque() {
         size = 0;
         pSize = 0;
         mSize = -1;
         capacity = 8;
+        mid = 4;
         items = (T[]) new Object[capacity];
     }
     private void resizing(int Capacity) {
@@ -20,6 +22,7 @@ public class ArrayDeque<T> implements deque<T>{
         System.arraycopy(items, 0, a, 0, size);
         items = a;
         capacity = Capacity;
+        mid = capacity / 2;
     }
     private void Resizing() {
         float R = size / capacity;
@@ -30,7 +33,7 @@ public class ArrayDeque<T> implements deque<T>{
     }
     @Override
     public void addFirst(T item) {
-        items[mSize--] = item;
+        items[mid + mSize--] = item;
         size++;
         if(size == capacity){
             resizing(size * 2);
@@ -39,7 +42,7 @@ public class ArrayDeque<T> implements deque<T>{
 
     @Override
     public void addLast(T item) {
-        items[pSize++] = item;
+        items[mid + pSize++] = item;
         size++;
         if(size == capacity){
             resizing(size * 2);
@@ -58,7 +61,7 @@ public class ArrayDeque<T> implements deque<T>{
 
     @Override
     public void printDeque() {
-        for (int i = mSize+1; i < pSize; i ++) {
+        for (int i = mid + mSize + 1; i < mid + pSize; i ++) {
             System.out.println(items[i]);
         }
     }
@@ -66,7 +69,7 @@ public class ArrayDeque<T> implements deque<T>{
     @Override
     public T removeFirst() {
         if (size == 0)  return null;
-        T First = items[mSize + 1];
+        T First = items[mid + mSize + 1];
         mSize++;
         size--;
         Resizing();
@@ -76,7 +79,7 @@ public class ArrayDeque<T> implements deque<T>{
     @Override
     public T removeLast() {
         if (size == 0)  return null;
-        T Last = items[pSize - 1];
+        T Last = items[mid + pSize - 1];
         pSize--;
         size--;
         Resizing();
@@ -85,7 +88,7 @@ public class ArrayDeque<T> implements deque<T>{
 
     @Override
     public T get(int index) {
-        return items[index + mSize + 1];
+        return items[mid + index + mSize + 1];
     }
 
     @Override
