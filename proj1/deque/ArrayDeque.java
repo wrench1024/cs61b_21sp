@@ -7,7 +7,7 @@ public class ArrayDeque<T> implements deque<T>{
     private int pSize;
     private int mSize;
     private int capacity;
-    private int mid = capacity / 2;
+    private int mid;
     private T[] items;
     public ArrayDeque() {
         size = 0;
