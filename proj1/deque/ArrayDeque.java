@@ -30,6 +30,7 @@ public class ArrayDeque<T> implements deque<T>{
             capacity /= 2;
             R = size * 1.0 / capacity;
         }
+        mid = capacity / 2;
         resizing(capacity);
     }
     @Override
