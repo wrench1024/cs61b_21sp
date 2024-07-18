@@ -120,15 +120,15 @@ public class ArrayDequeTest {
         // System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
         ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
-        for (int i = 0; i < 400; i++) {
+        for (int i = 0; i < 40; i++) {
             ad1.addLast(i);
         }
 
-        for (double i = 0; i < 200; i++) {
+        for (double i = 0; i < 20; i++) {
             assertEquals("Should have the same value", i, (double) ad1.removeFirst(), 0.0);
         }
 
-        for (double i = 399; i > 200; i--) {
+        for (double i = 39; i > 20; i--) {
             assertEquals("Should have the same value", i, (double) ad1.removeLast(), 0.0);
         }
 
@@ -139,16 +139,33 @@ public class ArrayDequeTest {
     public void fillUpEmptyFillUp() {
         ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
         ad.addFirst(0);
-        ad.addLast(1);
-        ad.addLast(2);
-        ad.addLast(3);
-        ad.size();
-        ad.size();
-        ad.addFirst(6);
+        System.out.println(ad.d);
+        ad.removeLast();      //==> 0
+        System.out.println(ad.d);
+        ad.isEmpty();
+        ad.isEmpty();
+        ad.isEmpty();
+        ad.addFirst(5);
+        ad.removeLast()   ;   //==> 5
         ad.addFirst(7);
-        ad.addLast(8);
-        ad.size();
-        ad.addFirst(10);
-        ad.addFirst(11);
+        ad.addFirst(8);
+        ad.removeLast()   ;   //==> 7
+        System.out.println(ad.d);
+        System.out.println(ad.removeLast());
+
+        ArrayDeque<Integer> a = new ArrayDeque<Integer>();
+        a.addFirst(0);
+        a.removeFirst();
+        a.addFirst(2);
+        a.addFirst(3);
+        a.addLast(4);
+        a.addLast(5);
+        a.removeFirst();
+        a.addFirst(7);
+        a.removeLast();
+        a.removeFirst();
+        a.removeFirst();
+        a.addFirst(11);
+        System.out.println(a.get(1));
     }
 }

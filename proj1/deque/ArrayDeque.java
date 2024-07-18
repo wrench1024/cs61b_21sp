@@ -8,12 +8,14 @@ public class ArrayDeque<T> implements Deque<T> {
     private int nextLast;
     private T[] items;
     private int capacity;
+    public int d;
     public ArrayDeque() {
         size = 0;
         capacity = 8;
         items = (T[]) new Object[capacity];
         nextFirst = -1;
         nextLast = 0;
+        d = 0;
     }
     public int getCapacity() {
         return capacity;
@@ -57,6 +59,7 @@ public class ArrayDeque<T> implements Deque<T> {
             R = size * 1.0 / capacity;
         }
         if (tmp != capacity) {
+            capacity = tmp;
             resizing(capacity);
         }
     }
@@ -67,6 +70,9 @@ public class ArrayDeque<T> implements Deque<T> {
     }
     @Override
     public void addFirst(T item) {
+        if (size == 0) {
+            d = 1;
+        }
         addCheck();
         if (nextFirst < 0) {
             nextFirst = capacity - 1;
@@ -92,11 +98,20 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void printDeque() {
-        for (int i = nextFirst; i < capacity; i++) {
-            System.out.println(items[i]);
+        if (nextFirst == capacity - 1) {
+            nextFirst = -1;
         }
-        for (int i = 0; i <= nextLast; i++) {
-            System.out.println(items[i]);
+        if (nextFirst >= nextLast - 1) {
+            for (int i = nextFirst; i < capacity; i++) {
+                System.out.println(items[i]);
+            }
+            for (int i = 0; i <= nextLast; i++) {
+                System.out.println(items[i]);
+            }
+        } else {
+            for (int i = nextFirst + 1; i < size; i++) {
+                System.out.println(items[i]);
+            }
         }
     }
 
@@ -115,6 +130,8 @@ public class ArrayDeque<T> implements Deque<T> {
         size--;
         if (size != 0) {
             removeCheck();
+        } else {
+            d = 0;
         }
         return firstItem;
     }
@@ -140,15 +157,22 @@ public class ArrayDeque<T> implements Deque<T> {
         } else {
             nextLast = capacity - 1;
         }
+        int tmp = d;
+        d = 0;
         T lastItem = get(nextLast);
+        d = tmp;
         size--;
-        removeCheck();
+        if (size != 0) {
+            removeCheck();
+        } else {
+            d = 0;
+        }
         return lastItem;
     }
 
     @Override
     public T get(int index) {
-        return items[index];
+        return items[index - d];
     }
 
     public Iterator<T> iterator() {

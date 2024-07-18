@@ -139,9 +139,27 @@ public class LinkedListDequeTest {
 
     @Test
     public void equalsTest() {
+        LinkedListDeque lld = new LinkedListDeque();
+        ArrayDeque ad = new ArrayDeque();
+        for (int i = 0; i < 8; i++) {
+            lld.addLast(i);
+        }
+        for (int i = 0; i < 8; i++) {
+            ad.addLast(i);
+        }
+        lld.printDeque();
+        ad.printDeque();
+        System.out.println(7777);
+        System.out.println(lld.equals(ad));
+    }
+
+    @Test
+    public void fillUpEmptyFillUp() {
         LinkedListDeque ll = new LinkedListDeque();
-        ArrayDeque ll1 = new ArrayDeque();
-        ll.addLast(1);
-        System.out.println(ll.equals(1));
+        ll.addFirst(0);
+        ll.removeFirst();
+        ll.addFirst(2);
+        ll.addFirst(3);
+        System.out.println(ll.get(0));
     }
 }

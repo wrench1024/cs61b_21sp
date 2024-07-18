@@ -34,7 +34,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public void printDeque() {
-        for (Node i = sentinel; i.next != sentinel; i = i.next) {
+        for (Node i = sentinel.next; i != sentinel; i = i.next) {
             System.out.println(i.item);
         }
     }
@@ -66,7 +66,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     @Override
     public T get(int index) {
         Node i = sentinel;
-        while (index-- > 0) {
+        while (index-- > -1) {
             i = i.next;
         }
         return (T) i.item;
@@ -94,7 +94,22 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Deque;
+        if (!(o instanceof Deque)) {
+            System.out.println(121);
+            return false;
+        }
+        if (((Deque<?>) o).size() != this.size()) {
+            System.out.println(1213434);
+            return false;
+        }
+        for (int i = 0; i < this.size(); i++) {
+            System.out.println(this.get(i));
+            System.out.println(((Deque<?>) o).get(i));
+            if (this.get(i) != ((Deque<?>) o).get(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
