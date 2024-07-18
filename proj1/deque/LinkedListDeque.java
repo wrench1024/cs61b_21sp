@@ -1,0 +1,109 @@
+package deque;
+import java.util.Iterator;
+
+public class LinkedListDeque<T> implements Deque<T> {
+
+    private int size;
+    private Node sentinel;
+
+    public LinkedListDeque() {
+        size = 0;
+        Node t = new Node();
+        sentinel = new Node(t, t, 0);
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
+    }
+    @Override
+    public void addFirst(T item) {
+        sentinel.next.prev = new Node(sentinel, sentinel.next, item);
+        sentinel.next = sentinel.next.prev;
+        size++;
+    }
+
+    @Override
+    public void addLast(T item) {
+        sentinel.prev.next = new Node(sentinel.prev, sentinel, item);
+        sentinel.prev = sentinel.prev.next;
+        size++;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public void printDeque() {
+        for (Node i = sentinel; i.next != sentinel; i = i.next) {
+            System.out.println(i.item);
+        }
+    }
+
+    @Override
+    public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
+        T firstItem = (T) sentinel.next.item;
+        sentinel.next.next.prev = sentinel;
+        sentinel.next = sentinel.next.next;
+        size--;
+        return firstItem;
+    }
+
+    @Override
+    public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
+        T lastItem = (T) sentinel.prev.item;
+        sentinel.prev.prev.next = sentinel;
+        sentinel.prev = sentinel.prev.prev;
+        size--;
+        return lastItem;
+    }
+
+    @Override
+    public T get(int index) {
+        Node i = sentinel;
+        while (index-- > 0) {
+            i = i.next;
+        }
+        return (T) i.item;
+    }
+
+    public Iterator<T> iterator() {
+        return new LDequeIterator();
+    }
+
+    private class LDequeIterator implements Iterator<T> {
+        private int pos;
+        LDequeIterator() {
+            pos = 0;
+        }
+
+        public boolean hasNext() {
+            return pos < size;
+        }
+
+        public T next() {
+            return get(pos++);
+        }
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Deque;
+    }
+
+
+    public T getRecursive(int index) {
+        if (index == 0) {
+            return (T) sentinel.item;
+        }
+        sentinel = sentinel.next;
+        return getRecursive(index - 1);
+    }
+
+}
