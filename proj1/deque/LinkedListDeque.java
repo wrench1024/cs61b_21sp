@@ -95,16 +95,12 @@ public class LinkedListDeque<T> implements Deque<T> {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Deque)) {
-            System.out.println(121);
             return false;
         }
         if (((Deque<?>) o).size() != this.size()) {
-            System.out.println(1213434);
             return false;
         }
         for (int i = 0; i < this.size(); i++) {
-            System.out.println(this.get(i));
-            System.out.println(((Deque<?>) o).get(i));
             if (this.get(i) != ((Deque<?>) o).get(i)) {
                 return false;
             }

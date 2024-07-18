@@ -8,14 +8,12 @@ public class ArrayDeque<T> implements Deque<T> {
     private int nextLast;
     private T[] items;
     private int capacity;
-    public int d;
     public ArrayDeque() {
         size = 0;
         capacity = 8;
         items = (T[]) new Object[capacity];
         nextFirst = -1;
         nextLast = 0;
-        d = 0;
     }
     public int getCapacity() {
         return capacity;
@@ -70,9 +68,6 @@ public class ArrayDeque<T> implements Deque<T> {
     }
     @Override
     public void addFirst(T item) {
-        if (size == 0) {
-            d = 1;
-        }
         addCheck();
         if (nextFirst < 0) {
             nextFirst = capacity - 1;
@@ -126,12 +121,10 @@ public class ArrayDeque<T> implements Deque<T> {
         } else {
             nextFirst = 0;
         }
-        firstItem = get(nextFirst);
+        firstItem = get_index(nextFirst);
         size--;
         if (size != 0) {
             removeCheck();
-        } else {
-            d = 0;
         }
         return firstItem;
     }
@@ -157,22 +150,36 @@ public class ArrayDeque<T> implements Deque<T> {
         } else {
             nextLast = capacity - 1;
         }
-        int tmp = d;
-        d = 0;
-        T lastItem = get(nextLast);
-        d = tmp;
+        T lastItem = get_index(nextLast);
         size--;
         if (size != 0) {
             removeCheck();
-        } else {
-            d = 0;
         }
         return lastItem;
     }
 
     @Override
     public T get(int index) {
-        return items[index - d];
+        return items[nextFirst + 1 + index];
+    }
+
+    public T get_index(int index) {
+        return items[index];
+    }
+
+    public boolean equals(Object o) {
+        if (!(o instanceof Deque)) {
+            return false;
+        }
+        if (((Deque<?>) o).size() != this.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i) != ((Deque<?>) o).get(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Iterator<T> iterator() {

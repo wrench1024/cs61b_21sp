@@ -137,35 +137,54 @@ public class ArrayDequeTest {
 
     @Test
     public void fillUpEmptyFillUp() {
-        ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
-        ad.addFirst(0);
-        System.out.println(ad.d);
-        ad.removeLast();      //==> 0
-        System.out.println(ad.d);
-        ad.isEmpty();
-        ad.isEmpty();
-        ad.isEmpty();
-        ad.addFirst(5);
-        ad.removeLast()   ;   //==> 5
-        ad.addFirst(7);
-        ad.addFirst(8);
-        ad.removeLast()   ;   //==> 7
-        System.out.println(ad.d);
-        System.out.println(ad.removeLast());
+//        ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
+//        ad.addFirst(0);
+//
+//        ad.removeLast();      //==> 0
+//
+//        ad.isEmpty();
+//        ad.isEmpty();
+//        ad.isEmpty();
+//        ad.addFirst(5);
+//        ad.removeLast()   ;   //==> 5
+//        ad.addFirst(7);
+//        ad.addFirst(8);
+//        ad.removeLast()   ;   //==> 7
+//        System.out.println(ad.removeLast());
 
         ArrayDeque<Integer> a = new ArrayDeque<Integer>();
+//        a.addFirst(0);
+//        a.removeFirst();
+//        a.addFirst(2);
+//        a.addFirst(3);
+//        a.addLast(4);
+//        a.addLast(5);
+//        a.removeFirst();
+//        a.addFirst(7);
+//        a.removeLast();
+//        a.removeFirst();
+//        a.removeFirst();
+//        a.addFirst(11);
+
         a.addFirst(0);
-        a.removeFirst();
-        a.addFirst(2);
-        a.addFirst(3);
+        a.removeLast();
+        a.addLast(2);
+        a.removeLast();
         a.addLast(4);
         a.addLast(5);
+        a.addLast(6);
         a.removeFirst();
-        a.addFirst(7);
+        a.removeFirst();
+        a.removeFirst();
+        a.addLast(10);
         a.removeLast();
+        a.addLast(12);
         a.removeFirst();
-        a.removeFirst();
-        a.addFirst(11);
+        a.addFirst(14);
+        a.addFirst(15);
+        a.addFirst(16);
+        a.addFirst(17);
+        a.removeLast();
         System.out.println(a.get(1));
     }
 }
