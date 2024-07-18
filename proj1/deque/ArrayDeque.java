@@ -35,7 +35,7 @@ public class ArrayDeque<T> implements Deque<T> {
         if (nextFirst == capacity - 1) {
             nextFirst = -1;
         }
-        if (nextFirst >= nextLast) {
+        if (nextFirst >= nextLast - 1) {
             System.arraycopy(items, nextFirst + 1, newItems, 0, size - nextLast);
             System.arraycopy(items, 0, newItems, size - nextLast, nextLast);
         } else {
@@ -52,7 +52,7 @@ public class ArrayDeque<T> implements Deque<T> {
     private void removeCheck() {
         int tmp = capacity;
         double R = size * 1.0 / capacity;
-        while (R < 0.25) {
+        while (R < 0.25 && size != 0) {
             capacity /= 2;
             R = size * 1.0 / capacity;
         }
