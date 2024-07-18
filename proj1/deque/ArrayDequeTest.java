@@ -187,4 +187,21 @@ public class ArrayDequeTest {
         a.removeLast();
         System.out.println(a.get(1));
     }
+    @Test
+    public void equalsTest() {
+        LinkedListDeque lld = new LinkedListDeque();
+        ArrayDeque ad = new ArrayDeque();
+        for (int i = 0; i < 8; i++) {
+            lld.addLast(i);
+        }
+        for (int i = 7; i >= 0; i--) {
+            ad.addFirst(i);
+        }
+        lld.printDeque();
+        System.out.println(8888);
+        System.out.println(ad.size());
+        ad.printDeque();
+        System.out.println(7777);
+        System.out.println(ad.equals(lld));
+    }
 }

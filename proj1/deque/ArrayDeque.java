@@ -61,7 +61,7 @@ public class ArrayDeque<T> implements Deque<T> {
             resizing(capacity);
         }
     }
-    public void addCheck() {
+    private void addCheck() {
         if (size == capacity) {
             resizing(capacity * 2);
         }
@@ -97,10 +97,10 @@ public class ArrayDeque<T> implements Deque<T> {
             nextFirst = -1;
         }
         if (nextFirst >= nextLast - 1) {
-            for (int i = nextFirst; i < capacity; i++) {
+            for (int i = nextFirst + 1; i < capacity; i++) {
                 System.out.println(items[i]);
             }
-            for (int i = 0; i <= nextLast; i++) {
+            for (int i = 0; i < nextLast; i++) {
                 System.out.println(items[i]);
             }
         } else {
@@ -128,17 +128,6 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         return firstItem;
     }
-//    public T getFirst() {
-//        T firstItem;
-//        int first = nextFirst;
-//        if (nextFirst < capacity - 1) {
-//            first++;
-//        } else {
-//            first = 0;
-//        }
-//        firstItem = get(first);
-//        return firstItem;
-//    }
 
     @Override
     public T removeLast() {

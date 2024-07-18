@@ -139,27 +139,40 @@ public class LinkedListDequeTest {
 
     @Test
     public void equalsTest() {
-        LinkedListDeque lld = new LinkedListDeque();
-        ArrayDeque ad = new ArrayDeque();
+        LinkedListDeque lld1 = new LinkedListDeque();
+        ArrayDeque lld2 = new ArrayDeque();
         for (int i = 0; i < 8; i++) {
-            lld.addLast(i);
+            lld1.addLast(i);
         }
         for (int i = 0; i < 8; i++) {
-            ad.addLast(i);
+            lld2.addLast(i);
         }
-        lld.printDeque();
-        ad.printDeque();
+        lld1.printDeque();
+        lld2.printDeque();
         System.out.println(7777);
-        System.out.println(lld.equals(ad));
+        System.out.println(lld1.equals(lld2));
     }
 
     @Test
     public void fillUpEmptyFillUp() {
         LinkedListDeque ll = new LinkedListDeque();
-        ll.addFirst(0);
-        ll.removeFirst();
-        ll.addFirst(2);
+//        ll.addFirst(0);
+//        ll.removeFirst();
+//        ll.addFirst(2);
+//        ll.addFirst(3);
+//        System.out.println(ll.get(0));
+
+        ll.addLast(0);
+        ll.removeLast();
         ll.addFirst(3);
-        System.out.println(ll.get(0));
+        ll.addLast(4);
+        ll.addFirst(5);
+        ll.addFirst(6);
+        ll.removeFirst();
+        ll.addFirst(8);
+        ll.addLast(9);
+        ll.removeLast();
+        ll.removeLast();
+        System.out.println(ll.getRecursive(0));
     }
 }
