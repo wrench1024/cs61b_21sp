@@ -10,26 +10,26 @@ public class ArrayDeque<T> implements Deque<T> {
     private int capacity;
     public ArrayDeque() {
         size = 0;
-        capacity = 8;
+        capacity = 4;
         items = (T[]) new Object[capacity];
         nextFirst = -1;
         nextLast = 0;
     }
-    public int getCapacity() {
-        return capacity;
-    }
-    public void setCapacity(int newCapacity) {
-        capacity = newCapacity;
-    }
-    public void setItems(T[] newItems) {
-        items = newItems;
-    }
-    public void setItem(T item, int i) {
-        items[i] = item;
-    }
-    public T getItem(int i) {
-        return items[i];
-    }
+//    public int getCapacity() {
+//        return capacity;
+//    }
+//    public void setCapacity(int newCapacity) {
+//        capacity = newCapacity;
+//    }
+//    public void setItems(T[] newItems) {
+//        items = newItems;
+//    }
+//    public void setItem(T item, int i) {
+//        items[i] = item;
+//    }
+//    public T getItem(int i) {
+//        return items[i];
+//    }
     private void resizing(int newCapacity) {
         T[] newItems = (T[]) new Object[newCapacity];
         if (nextFirst == capacity - 1) {
@@ -121,24 +121,24 @@ public class ArrayDeque<T> implements Deque<T> {
         } else {
             nextFirst = 0;
         }
-        firstItem = get_index(nextFirst);
+        firstItem = getIndex(nextFirst);
         size--;
         if (size != 0) {
             removeCheck();
         }
         return firstItem;
     }
-    public T getFirst() {
-        T firstItem;
-        int first = nextFirst;
-        if (nextFirst < capacity - 1) {
-            first++;
-        } else {
-            first = 0;
-        }
-        firstItem = get(first);
-        return firstItem;
-    }
+//    public T getFirst() {
+//        T firstItem;
+//        int first = nextFirst;
+//        if (nextFirst < capacity - 1) {
+//            first++;
+//        } else {
+//            first = 0;
+//        }
+//        firstItem = get(first);
+//        return firstItem;
+//    }
 
     @Override
     public T removeLast() {
@@ -150,7 +150,7 @@ public class ArrayDeque<T> implements Deque<T> {
         } else {
             nextLast = capacity - 1;
         }
-        T lastItem = get_index(nextLast);
+        T lastItem = getIndex(nextLast);
         size--;
         if (size != 0) {
             removeCheck();
@@ -160,10 +160,14 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        return items[nextFirst + 1 + index];
+        int t = nextFirst;
+        if (t + index >= capacity - 1) {
+            t -= capacity;
+        }
+        return items[t + 1 + index];
     }
 
-    public T get_index(int index) {
+    private T getIndex(int index) {
         return items[index];
     }
 

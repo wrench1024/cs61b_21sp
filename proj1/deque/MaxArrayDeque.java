@@ -21,10 +21,10 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        T maxItem = getItem(0);
+        T maxItem = get(0);
         for (int i = 0; i < size(); i++) {
-            if (comparator.compare(getItem(i), maxItem) > 0) {
-                maxItem = getItem(i);
+            if (comparator.compare(get(i), maxItem) > 0) {
+                maxItem = get(i);
             }
         }
         return maxItem;

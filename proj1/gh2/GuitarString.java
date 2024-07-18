@@ -15,11 +15,10 @@ public class GuitarString {
 
     /* Create a guitar string of the given frequency.  */
     public GuitarString(double frequency) {
-        buffer = new ArrayDeque<Double>();
-        buffer.setCapacity((int) Math.round(SR / frequency));
-        buffer.setItems(new Double[buffer.getCapacity()]);
-        for (int i = 0; i < buffer.getCapacity(); i++) {
-            buffer.setItem(0.0, i);
+        buffer = new ArrayDeque<>();
+        int t = (int) Math.round(SR / frequency);
+        for (int i = 0; i < t; i++) {
+            buffer.addLast(0.0);
         }
     }
 
@@ -30,8 +29,9 @@ public class GuitarString {
         //       other. This does not mean that you need to check that the numbers
         //       are different from each other. It means you should repeatedly call
         //       Math.random() - 0.5 to generate new random numbers for each array index.
-        int tmp = buffer.getCapacity();
-        for (int i = 0; i < tmp; i++) {
+        int t = buffer.size();
+        for (int i = 0; i < t; i++) {
+            buffer.removeFirst();
             double r = Math.random() - 0.5;
             buffer.addLast(r);
         }
@@ -41,12 +41,13 @@ public class GuitarString {
      * the Karplus-Strong algorithm.
      */
     public void tic() {
-        buffer.addLast((buffer.removeFirst() + buffer.getFirst()) * 0.5  * DECAY);
+        double t = buffer.removeFirst();
+        buffer.addLast((t + buffer.get(0)) * 0.5  * DECAY);
     }
 
     /* Return the double at the front of the buffer. */
     public double sample() {
-        return buffer.getFirst();
+        return buffer.get(0);
     }
 }
 
