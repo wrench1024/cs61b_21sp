@@ -160,6 +160,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return true;
     }
 
+    @Override
     public Iterator<T> iterator() {
         return new ADequeIterator();
     }
