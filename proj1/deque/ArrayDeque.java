@@ -145,6 +145,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return items[index];
     }
 
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof Deque)) {
             return false;
