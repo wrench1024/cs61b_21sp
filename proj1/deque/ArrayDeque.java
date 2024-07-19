@@ -15,21 +15,7 @@ public class ArrayDeque<T> implements Deque<T> {
         nextFirst = -1;
         nextLast = 0;
     }
-//    public int getCapacity() {
-//        return capacity;
-//    }
-//    public void setCapacity(int newCapacity) {
-//        capacity = newCapacity;
-//    }
-//    public void setItems(T[] newItems) {
-//        items = newItems;
-//    }
-//    public void setItem(T item, int i) {
-//        items[i] = item;
-//    }
-//    public T getItem(int i) {
-//        return items[i];
-//    }
+
     private void resizing(int newCapacity) {
         T[] newItems = (T[]) new Object[newCapacity];
         if (nextFirst == capacity - 1) {
@@ -44,7 +30,6 @@ public class ArrayDeque<T> implements Deque<T> {
         nextFirst = newCapacity - 1;
         nextLast = size;
 
-//        System.arraycopy(items, 0, newItems, 0, size);
         items = newItems;
         capacity = newCapacity;
     }
@@ -185,12 +170,14 @@ public class ArrayDeque<T> implements Deque<T> {
             pos = 0;
         }
 
+        @Override
         public boolean hasNext() {
             return pos < size;
         }
 
+        @Override
         public T next() {
-            return items[pos++];
+            return get(pos++);
         }
     }
 }

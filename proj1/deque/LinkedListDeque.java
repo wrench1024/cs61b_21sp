@@ -82,10 +82,12 @@ public class LinkedListDeque<T> implements Deque<T> {
             pos = 0;
         }
 
+        @Override
         public boolean hasNext() {
             return pos < size;
         }
 
+        @Override
         public T next() {
             return get(pos++);
         }
