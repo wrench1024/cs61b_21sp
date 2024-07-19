@@ -162,17 +162,14 @@ public class LinkedListDequeTest {
 //        ll.addFirst(3);
 //        System.out.println(ll.get(0));
 
-        ll.addLast(0);
-        ll.removeLast();
-        ll.addFirst(3);
-        ll.addLast(4);
-        ll.addFirst(5);
-        ll.addFirst(6);
+        ll.addFirst(0);
+        ll.addLast(1);
+        ll.addFirst(2);
         ll.removeFirst();
-        ll.addFirst(8);
-        ll.addLast(9);
-        ll.removeLast();
-        ll.removeLast();
-        System.out.println(ll.getRecursive(0));
+        ll.addLast(4);
+        ll.addLast(5);
+        ll.getRecursive(1);
+        ll.addFirst(7);
+        System.out.println(ll.removeLast());
     }
 }

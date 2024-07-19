@@ -48,7 +48,7 @@ public class ArrayDeque<T> implements Deque<T> {
     }
     private void addCheck() {
         if (size == capacity) {
-            resizing(capacity * 2);
+            resizing((int) (capacity * 1.5));
         }
     }
     @Override
@@ -154,14 +154,17 @@ public class ArrayDeque<T> implements Deque<T> {
             return false;
         }
         for (int i = 0; i < this.size(); i++) {
-            if (this.get(i) != ((Deque<?>) o).get(i)) {
+            T thisItem = this.get(i);
+            Object otherItem = ((Deque<?>) o).get(i);
+            if (thisItem == null) {
+                return otherItem == null;
+            } else if (!thisItem.equals(otherItem)) {
                 return false;
             }
         }
         return true;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return new ADequeIterator();
     }
