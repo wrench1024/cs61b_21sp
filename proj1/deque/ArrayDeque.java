@@ -35,9 +35,14 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     private void removeCheck() {
+        if (size == 0) {
+            capacity /= 2;
+            resizing(capacity);
+            return;
+        }
         int tmp = capacity;
         double R = size * 1.0 / capacity;
-        while (R < 0.25 && size != 0) {
+        while (R < 0.25) {
             capacity /= 2;
             R = size * 1.0 / capacity;
         }
@@ -108,9 +113,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         firstItem = getIndex(nextFirst);
         size--;
-        if (size != 0) {
-            removeCheck();
-        }
+        removeCheck();
         return firstItem;
     }
 
@@ -126,9 +129,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         T lastItem = getIndex(nextLast);
         size--;
-        if (size != 0) {
-            removeCheck();
-        }
+        removeCheck();
         return lastItem;
     }
 
