@@ -48,7 +48,7 @@ public class ArrayDeque<T> implements Deque<T> {
     }
     private void addCheck() {
         if (size == capacity) {
-            resizing((int) (capacity * 1.5));
+            resizing(capacity * 2);
         }
     }
     @Override
