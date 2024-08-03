@@ -1,6 +1,7 @@
 package capers;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 import static capers.Utils.*;
@@ -34,9 +35,20 @@ public class CapersRepository {
      *    - story -- file containing the current story
      */
     public static void setupPersistence() {
-        // TODO
         File dir = new File(".capers");
-        dir.mkdir();
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        File storyFile = new File(dir, "story");
+        try {
+            storyFile.createNewFile();
+        } catch (IOException e) {
+            System.err.println("Error creating story file: " + e.getMessage());
+        }
+
+        File dogsFile = new File(".capers/dogs");
+        dogsFile.mkdir();
     }
 
     /**
@@ -48,7 +60,7 @@ public class CapersRepository {
         // TODO
         String r = readContentsAsString(CAPERS_FOLDER);
         writeContents(CAPERS_FOLDER, r, text, "\n");
-        System.out.println(readContentsAsString(CAPERS_FOLDER));
+        System.out.print(readContentsAsString(CAPERS_FOLDER));
     }
 
     /**
