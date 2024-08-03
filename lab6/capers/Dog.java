@@ -1,6 +1,7 @@
 package capers;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import static capers.Utils.*;
 
@@ -35,13 +36,13 @@ public class Dog implements Serializable{ // TODO
 
     /**
      * Reads in and deserializes a dog from a file with name NAME in DOG_FOLDER.
-     *
      * @param name Name of dog to load
      * @return Dog read from file
      */
     public static Dog fromFile(String name) {
         // TODO (hint: look at the Utils file)
-        return readObject(DOG_FOLDER, Dog.class);
+        File thisDog = Utils.join(DOG_FOLDER, name);
+        return readObject(thisDog, Dog.class);
     }
 
     /**
@@ -59,7 +60,13 @@ public class Dog implements Serializable{ // TODO
     public void saveDog() {
         // TODO (hint: don't forget dog names are unique)
         Dog newDog = new Dog(name, breed, age);
-        writeObject(DOG_FOLDER, newDog);
+        File dogFile = new File(DOG_FOLDER, newDog.name);
+        try {
+            dogFile.createNewFile();
+        } catch (IOException e) {
+            System.err.println("Error creating dog file: " + e.getMessage());
+        }
+        writeObject(dogFile, newDog);
     }
 
     @Override
