@@ -30,7 +30,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * @param key
      */
     @Override
-    public boolean containsKey(K key) {
+    public boolean containsKey (K key) {
         return get(key) != null;
     }
 
