@@ -48,7 +48,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         return getNode(key).value;
     }
 
-    public Node getNode(K key) {
+    private Node getNode(K key) {
         Node targetNode = null;
         int index = (key.hashCode() & 0x7fffffff) % buckets.length;
         Collection<Node> thisBucket = buckets[index];
