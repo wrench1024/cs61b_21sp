@@ -30,7 +30,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * @param key
      */
     @Override
-    public boolean containsKey (K key) {
+    public boolean containsKey(K key) {
         return get(key) != null;
     }
 
@@ -71,7 +71,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         return size;
     }
 
-    private Collection<Node>[] setCapacity (int newCapacity) {
+    private Collection<Node>[] setCapacity(int newCapacity) {
         Collection<Node>[] newBuckets = createTable(newCapacity);
         for (Collection<Node> bucket : buckets) {
             if (bucket != null) {
@@ -304,8 +304,5 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     private Collection<Node>[] createTable(int tableSize) {
         return new Collection[tableSize];
     }
-
-    // TODO: Implement the methods of the Map61B Interface below
-    // Your code won't compile until you do so!
 
 }
