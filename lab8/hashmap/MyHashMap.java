@@ -10,9 +10,9 @@ import java.util.*;
  *  @author YOUR NAME HERE
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
-    int capacity = 16;
-    int size = 0;
-    double loadFactor = 0.25;
+    private int capacity = 16;
+    private int size = 0;
+    private double loadFactor = 0.25;
 
     /**
      * Removes all the mappings from this map.
@@ -42,7 +42,14 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        V value = null;
+        if (getNode(key) == null) {
+            return null;
+        }
+        return getNode(key).value;
+    }
+
+    public Node getNode(K key) {
+        Node targetNode = null;
         int index = (key.hashCode() & 0x7fffffff) % buckets.length;
         Collection<Node> thisBucket = buckets[index];
         if (thisBucket == null) {
@@ -50,10 +57,10 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         }
         for (Node thisNode : thisBucket) {
             if (thisNode.key.equals(key)) {
-                value = thisNode.value;
+                targetNode = thisNode;
             }
         }
-        return value;
+        return targetNode;
     }
 
     /**
@@ -64,7 +71,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         return size;
     }
 
-    public Collection<Node>[] setCapacity (int newCapacity) {
+    private Collection<Node>[] setCapacity (int newCapacity) {
         Collection<Node>[] newBuckets = createTable(newCapacity);
         for (Collection<Node> bucket : buckets) {
             if (bucket != null) {
@@ -76,7 +83,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         return newBuckets;
     }
 
-    public void resize() {
+    private void resize() {
         double currentFactor = 1.0 * size / capacity;
         if (currentFactor >= loadFactor) {
             capacity *= 2;
@@ -97,7 +104,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         put(key, value, buckets);
     }
 
-    public void put(K key, V value, Collection<Node>[] thisBuckets) {
+    private void put(K key, V value, Collection<Node>[] thisBuckets) {
         int index = ((key.hashCode() & 0x7fffffff) % capacity);
         if (thisBuckets[index] == null) {
             thisBuckets[index] = createBucket();
@@ -135,8 +142,14 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException("Operation not supported");
-
+        if (!containsKey(key)) {
+            return null;
+        }
+        V removed = get(key);
+        Node removedNode = getNode(key);
+        int index = ((key.hashCode() & 0x7fffffff) % capacity);
+        buckets[index].remove(removedNode);
+        return removed;
     }
 
     /**
@@ -149,7 +162,11 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V remove(K key, V value) {
-        throw new UnsupportedOperationException("Operation not supported");
+        if (!containsKey(key)) {
+            return null;
+        }
+        remove(key);
+        return value;
     }
 
     private class HashMapIterator implements Iterator<K> {
@@ -191,14 +208,13 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         return new HashMapIterator();
     }
 
-    @Override
-    public int hashCode() {
-        int hashCode = 1;
-        for (Object o : this) {
-            hashCode = hashCode * 31 + o.hashCode();
-        }
-        return hashCode % capacity;
-    }
+//    public int MyHashCode() {
+//        int hashCode = 1;
+//        for (Object o : this) {
+//            hashCode = hashCode * 31 + o.hashCode();
+//        }
+//        return hashCode % capacity;
+//    }
 
     /**
      * Protected helper class to store key/value pairs
