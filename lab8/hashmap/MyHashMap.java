@@ -114,6 +114,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         }
         Node newNode = createNode(key, value);
         thisBuckets[index].add(newNode);
+        getNode(key).setValue(value);
         resize();
     }
 
@@ -228,6 +229,11 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
             key = k;
             value = v;
         }
+
+        private void setValue(V newValue) {
+            value = newValue;
+        }
+
     }
 
     /* Instance Variables */

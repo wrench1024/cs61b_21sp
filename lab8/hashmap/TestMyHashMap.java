@@ -33,6 +33,7 @@ public class TestMyHashMap {
             //make sure put is working via containsKey and get
             assertTrue(null != b.get("hi" + i)
                     && b.containsKey("hi" + i));
+            System.out.println(i + " good");
         }
         b.clear();
         assertEquals(0, b.size());
@@ -131,6 +132,7 @@ public class TestMyHashMap {
         // putting with existing key updates the value
         dictionary.put("hello", "kevin");
         assertEquals(1, dictionary.size());
+        System.out.println(dictionary.get("hello"));
         assertEquals("kevin", dictionary.get("hello"));
 
         // putting key in multiple times does not affect behavior
